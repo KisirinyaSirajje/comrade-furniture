@@ -282,3 +282,470 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+// Product Filtering and Sorting Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Product data with additional attributes for filtering
+    const productData = [
+        {
+            id: 1,
+            title: 'Luxury Sofa',
+            price: 1200000,
+            priceFormatted: 'UGX 1,200,000',
+            image: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c',
+            category: 'Living Room',
+            material: ['Fabric', 'Wood'],
+            color: ['Brown', 'Gray'],
+            rating: 4.5,
+            featured: true,
+            date: new Date('2023-01-15')
+        },
+        {
+            id: 2,
+            title: 'Wooden Coffee Table',
+            price: 450000,
+            priceFormatted: 'UGX 450,000',
+            image: 'https://images.unsplash.com/photo-1592078615290-033ee584e267',
+            category: 'Living Room',
+            material: ['Wood', 'Glass'],
+            color: ['Brown'],
+            rating: 5,
+            featured: true,
+            date: new Date('2023-02-20')
+        },
+        {
+            id: 3,
+            title: 'Dining Set',
+            price: 850000,
+            priceFormatted: 'UGX 850,000',
+            image: 'https://images.unsplash.com/photo-1505693314120-0d443867891c',
+            category: 'Dining',
+            material: ['Wood', 'Fabric'],
+            color: ['Brown', 'White'],
+            rating: 4,
+            featured: false,
+            date: new Date('2023-03-10')
+        },
+        {
+            id: 4,
+            title: 'Bookshelf',
+            price: 380000,
+            priceFormatted: 'UGX 380,000',
+            image: 'https://images.unsplash.com/photo-1540574163026-643ea20ade25',
+            category: 'Living Room',
+            material: ['Wood'],
+            color: ['Brown', 'Black'],
+            rating: 3.5,
+            featured: false,
+            date: new Date('2023-01-05')
+        },
+        {
+            id: 5,
+            title: 'Bedroom Set',
+            price: 1500000,
+            priceFormatted: 'UGX 1,500,000',
+            image: 'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e',
+            category: 'Bedroom',
+            material: ['Wood', 'Fabric'],
+            color: ['Brown', 'White'],
+            rating: 5,
+            featured: true,
+            date: new Date('2023-04-15')
+        },
+        {
+            id: 6,
+            title: 'Office Chair',
+            price: 320000,
+            priceFormatted: 'UGX 320,000',
+            image: 'https://images.unsplash.com/photo-1581539250439-c96689b516dd',
+            category: 'Office',
+            material: ['Metal', 'Fabric', 'Leather'],
+            color: ['Black', 'Gray'],
+            rating: 4,
+            featured: false,
+            date: new Date('2023-02-28')
+        },
+        {
+            id: 7,
+            title: 'Accent Chair',
+            price: 280000,
+            priceFormatted: 'UGX 280,000',
+            image: 'https://images.unsplash.com/photo-1551298370-9d3d53740c72',
+            category: 'Living Room',
+            material: ['Fabric', 'Wood'],
+            color: ['Gold', 'Gray'],
+            rating: 3.5,
+            featured: true,
+            date: new Date('2023-03-25')
+        },
+        {
+            id: 8,
+            title: 'TV Stand',
+            price: 420000,
+            priceFormatted: 'UGX 420,000',
+            image: 'https://images.unsplash.com/photo-1530018607912-eff2daa1bac4',
+            category: 'Living Room',
+            material: ['Wood', 'Glass'],
+            color: ['Brown', 'Black'],
+            rating: 4,
+            featured: false,
+            date: new Date('2023-01-30')
+        }
+    ];
+
+    // Elements
+    const productGrid = document.querySelector('.product-grid');
+    const categoryLinks = document.querySelectorAll('.category-filter a');
+    const priceSlider = document.querySelector('.price-slider');
+    const materialCheckboxes = document.querySelectorAll('.checkbox-filter input');
+    const colorOptions = document.querySelectorAll('.color-filter .color-option');
+    const filterBtn = document.querySelector('.filter-btn');
+    const sortSelect = document.getElementById('sort');
+    const productsCount = document.querySelector('.products-count p');
+
+    // Current filter state
+    let filters = {
+        category: 'All Products',
+        priceRange: 1000000,
+        materials: [],
+        colors: []
+    };
+
+    // Current sort option
+    let currentSort = 'featured';
+
+    // Initialize
+    if (productGrid) {
+        // Set up category filter
+        categoryLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all links
+                categoryLinks.forEach(l => l.classList.remove('active'));
+                
+                // Add active class to clicked link
+                this.classList.add('active');
+                
+                // Update filter
+                filters.category = this.textContent;
+                
+                // Apply filters
+                applyFilters();
+            });
+        });
+
+        // Set up price range filter
+        if (priceSlider) {
+            priceSlider.addEventListener('input', function() {
+                filters.priceRange = parseInt(this.value);
+                
+                // Update displayed value
+                const priceValues = document.querySelector('.price-values');
+                if (priceValues) {
+                    const maxPrice = priceValues.querySelector('span:last-child');
+                    maxPrice.textContent = `UGX ${filters.priceRange.toLocaleString()}`;
+                }
+            });
+        }
+
+        // Set up material filter
+        materialCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const material = this.parentElement.textContent.trim();
+                
+                if (this.checked) {
+                    // Add material to filters if not already present
+                    if (!filters.materials.includes(material)) {
+                        filters.materials.push(material);
+                    }
+                } else {
+                    // Remove material from filters
+                    filters.materials = filters.materials.filter(m => m !== material);
+                }
+            });
+        });
+
+        // Set up color filter
+        colorOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                // Toggle active class
+                this.classList.toggle('active');
+                
+                // Determine color based on background color
+                let color;
+                const bgColor = this.style.backgroundColor.toLowerCase();
+                
+                if (bgColor === 'rgb(139, 69, 19)' || bgColor === '#8b4513') {
+                    color = 'Brown';
+                } else if (bgColor === 'rgb(0, 0, 0)' || bgColor === '#000') {
+                    color = 'Black';
+                } else if (bgColor === 'rgb(211, 211, 211)' || bgColor === '#d3d3d3') {
+                    color = 'Gray';
+                } else if (bgColor === 'rgb(255, 255, 255)' || bgColor === '#fff') {
+                    color = 'White';
+                } else if (bgColor === 'rgb(218, 165, 32)' || bgColor === '#daa520') {
+                    color = 'Gold';
+                }
+                
+                if (color) {
+                    if (this.classList.contains('active')) {
+                        // Add color to filters if not already present
+                        if (!filters.colors.includes(color)) {
+                            filters.colors.push(color);
+                        }
+                    } else {
+                        // Remove color from filters
+                        filters.colors = filters.colors.filter(c => c !== color);
+                    }
+                }
+            });
+        });
+
+        // Apply filters button
+        if (filterBtn) {
+            filterBtn.addEventListener('click', function() {
+                applyFilters();
+            });
+        }
+
+        // Set up sorting
+        if (sortSelect) {
+            sortSelect.addEventListener('change', function() {
+                currentSort = this.value;
+                applyFilters();
+            });
+        }
+
+        // Initial display
+        applyFilters();
+    }
+
+    // Function to apply filters and sort
+    function applyFilters() {
+        // Start with all products
+        let filteredProducts = [...productData];
+        
+        // Apply category filter
+        if (filters.category !== 'All Products') {
+            filteredProducts = filteredProducts.filter(product => 
+                product.category === filters.category
+            );
+        }
+        
+        // Apply price filter
+        filteredProducts = filteredProducts.filter(product => 
+            product.price <= filters.priceRange
+        );
+        
+        // Apply material filter
+        if (filters.materials.length > 0) {
+            filteredProducts = filteredProducts.filter(product => 
+                filters.materials.some(material => product.material.includes(material))
+            );
+        }
+        
+        // Apply color filter
+        if (filters.colors.length > 0) {
+            filteredProducts = filteredProducts.filter(product => 
+                filters.colors.some(color => product.color.includes(color))
+            );
+        }
+        
+        // Apply sorting
+        switch (currentSort) {
+            case 'price-low':
+                filteredProducts.sort((a, b) => a.price - b.price);
+                break;
+            case 'price-high':
+                filteredProducts.sort((a, b) => b.price - a.price);
+                break;
+            case 'newest':
+                filteredProducts.sort((a, b) => b.date - a.date);
+                break;
+            case 'featured':
+            default:
+                filteredProducts.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
+                break;
+        }
+        
+        // Update product display
+        renderProducts(filteredProducts);
+        
+        // Update product count
+        if (productsCount) {
+            productsCount.textContent = `Showing 1-${filteredProducts.length} of ${filteredProducts.length} products`;
+        }
+    }
+
+    // Function to render products
+    function renderProducts(products) {
+        if (!productGrid) return;
+        
+        // Clear current products
+        productGrid.innerHTML = '';
+        
+        // Add filtered products
+        products.forEach(product => {
+            const productCard = document.createElement('div');
+            productCard.className = 'product-card';
+            
+            // Generate rating stars HTML
+            const ratingStars = generateRatingStars(product.rating);
+            
+            productCard.innerHTML = `
+                <div class="product-image">
+                    <img src="${product.image}" alt="${product.title}">
+                    <div class="product-overlay">
+                        <a href="#" class="add-to-cart" data-id="${product.id}"><i class="fas fa-shopping-cart"></i></a>
+                        <a href="#" class="quick-view"><i class="fas fa-eye"></i></a>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3>${product.title}</h3>
+                    <div class="rating">
+                        ${ratingStars}
+                    </div>
+                    <p class="price">${product.priceFormatted}</p>
+                </div>
+            `;
+            
+            productGrid.appendChild(productCard);
+        });
+        
+        // Reattach event listeners for quick view and add to cart
+        attachProductEventListeners();
+    }
+
+    // Function to generate rating stars HTML
+    function generateRatingStars(rating) {
+        let starsHTML = '';
+        
+        for (let i = 1; i <= 5; i++) {
+            if (i <= Math.floor(rating)) {
+                starsHTML += '<i class="fas fa-star"></i>';
+            } else if (i === Math.ceil(rating) && rating % 1 !== 0) {
+                starsHTML += '<i class="fas fa-star-half-alt"></i>';
+            } else {
+                starsHTML += '<i class="far fa-star"></i>';
+            }
+        }
+        
+        return starsHTML;
+    }
+
+    // Function to reattach event listeners to product buttons
+    function attachProductEventListeners() {
+        // Quick view buttons
+        const quickViewButtons = document.querySelectorAll('.quick-view');
+        if (quickViewButtons.length > 0 && typeof handleQuickView === 'function') {
+            quickViewButtons.forEach(button => {
+                button.addEventListener('click', handleQuickView);
+            });
+        }
+        
+        // Add to cart buttons
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        if (addToCartButtons.length > 0) {
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Get current cart count
+                    const cartCount = document.querySelector('.cart-count');
+                    if (cartCount) {
+                        const currentCount = parseInt(cartCount.textContent);
+                        cartCount.textContent = currentCount + 1;
+                    }
+                    
+                    // Show notification
+                    if (typeof showNotification === 'function') {
+                        showNotification('Product added to cart!');
+                    }
+                });
+            });
+        }
+    }
+
+    // Helper function for quick view (referenced in attachProductEventListeners)
+    function handleQuickView(e) {
+        e.preventDefault();
+        
+        // Get product ID from the closest product card
+        const productCard = this.closest('.product-card');
+        const addToCartBtn = productCard.querySelector('.add-to-cart');
+        const productId = addToCartBtn ? parseInt(addToCartBtn.getAttribute('data-id')) : null;
+        
+        if (productId) {
+            // Find product data
+            const product = productData.find(p => p.id === productId);
+            
+            if (product && window.showQuickView) {
+                window.showQuickView(product);
+            }
+        }
+    }
+
+    // Make showQuickView function available globally
+    window.showQuickView = function(product) {
+        const quickViewModal = document.querySelector('.quick-view-modal');
+        if (!quickViewModal) return;
+        
+        const modalImage = quickViewModal.querySelector('.product-quick-image img');
+        const modalTitle = quickViewModal.querySelector('.product-title');
+        const modalPrice = quickViewModal.querySelector('.product-price');
+        const modalDescription = quickViewModal.querySelector('.product-description');
+        const modalSku = quickViewModal.querySelector('.product-sku');
+        const modalCategory = quickViewModal.querySelector('.product-category');
+        
+        if (modalImage) modalImage.src = product.image;
+        if (modalImage) modalImage.alt = product.title;
+        if (modalTitle) modalTitle.textContent = product.title;
+        if (modalPrice) modalPrice.textContent = product.priceFormatted;
+        if (modalDescription) modalDescription.textContent = product.description || 'Experience the perfect blend of style and comfort with this premium furniture piece. Crafted with high-quality materials and designed for modern living.';
+        if (modalSku) modalSku.textContent = `PROD-${product.id.toString().padStart(3, '0')}`;
+        if (modalCategory) modalCategory.textContent = product.category;
+        
+        // Set up rating stars based on product rating
+        const ratingStars = quickViewModal.querySelectorAll('.product-rating i');
+        const rating = product.rating;
+        
+        if (ratingStars.length > 0) {
+            ratingStars.forEach((star, index) => {
+                if (index < Math.floor(rating)) {
+                    star.className = 'fas fa-star'; // Full star
+                } else if (index < Math.ceil(rating) && rating % 1 !== 0) {
+                    star.className = 'fas fa-star-half-alt'; // Half star
+                } else {
+                    star.className = 'far fa-star'; // Empty star
+                }
+            });
+        }
+        
+        // Show modal
+        quickViewModal.classList.add('active');
+    };
+
+    // Helper function for notifications
+    window.showNotification = function(message) {
+        // Create notification element
+        const notification = document.createElement('div');
+        notification.className = 'notification';
+        notification.textContent = message;
+        
+        // Add to body
+        document.body.appendChild(notification);
+        
+        // Show notification
+        setTimeout(() => {
+            notification.classList.add('show');
+        }, 10);
+        
+        // Remove after 3 seconds
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => {
+                notification.remove();
+            }, 300);
+        }, 3000);
+    };
+});
