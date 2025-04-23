@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - Comrade Furniture</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="top-bar">
+            <div class="container">
+                <div class="contact-info">
+                    <span><i class="fas fa-phone"></i> +256 700 123456</span>
+                    <span><i class="fas fa-envelope"></i> info@comradefurniture.com</span>
+                </div>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <div class="container">
+                <div class="logo">
+                    <h1>Comrade Furniture</h1>
+                </div>
+                <div class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="nav-icons">
+                    <a href="#" class="search-icon"><i class="fas fa-search"></i></a>
+                    <a href="cart.html" class="cart-icon active"><i class="fas fa-shopping-cart"></i><span class="cart-count">3</span></a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="page-banner">
+        <div class="container">
+            <h1>Shopping Cart</h1>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> / Shopping Cart
+            </div>
+        </div>
+    </section>
+
+    <section class="cart-section">
+        <div class="container">
+            <div class="cart-content">
+                <div class="cart-items">
+                    <h2>Your Cart (3 items)</h2>
+                    <div class="cart-table">
+                        <div class="cart-header">
+                            <div class="cart-col product-col">Product</div>
+                            <div class="cart-col price-col">Price</div>
+                            <div class="cart-col quantity-col">Quantity</div>
+                            <div class="cart-col total-col">Total</div>
+                            <div class="cart-col remove-col"></div>
+                        </div>
+                        <div class="cart-item">
+                            <div class="cart-col product-col">
+                                <div class="cart-product">
+                                    <img src="https://images.unsplash.com/photo-1567538096630-e0c55bd6374c" alt="Luxury Sofa">
+                                    <div class="cart-product-info">
+                                        <h3>Luxury Sofa</h3>
+                                        <p>Color: Brown</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cart-col price-col">
+                                <p>UGX 1,200,000</p>
+                            </div>
+                            <div class="cart-col quantity-col">
+                                <div class="quantity-selector">
+                                    <button class="quantity-btn minus">-</button>
+                                    <input type="number" value="1" min="1" class="quantity-input">
+                                    <button class="quantity-btn plus">+</button>
+                                </div>
+                            </div>
+                            <div class="cart-col total-col">
+                                <p>UGX 1,200,000</p>
+                            </div>
+                            <div class="cart-col remove-col">
+                                <button class="remove-item"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div class="cart-item">
+                            <div class="cart-col product-col">
+                                <div class="cart-product">
+                                    <img src="https://images.unsplash.com/photo-1592078615290-033ee584e267" alt="Wooden Coffee Table">
+                                    <div class="cart-product-info">
+                                        <h3>Wooden Coffee Table</h3>
+                                        <p>Material: Oak</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cart-col price-col">
+                                <p>UGX 450,000</p>
+                            </div>
+                            <div class="cart-col quantity-col">
+                                <div class="quantity-selector">
+                                    <button class="quantity-btn minus">-</button>
+                                    <input type="number" value="1" min="1" class="quantity-input">
+                                    <button class="quantity-btn plus">+</button>
+                                </div>
+                            </div>
+                            <div class="cart-col total-col">
+                                <p>UGX 450,000</p>
+                            </div>
+                            <div class="cart-col remove-col">
+                                <button class="remove-item"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div class="cart-item">
+                            <div class="cart-col product-col">
+                                <div class="cart-product">
+                                    <img src="https://images.unsplash.com/photo-1581539250439-c96689b516dd" alt="Office Chair">
+                                    <div class="cart-product-info">
+                                        <h3>Office Chair</h3>
+                                        <p>Color: Black</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cart-col price-col">
+                                <p>UGX 320,000</p>
+                            </div>
+                            <div class="cart-col quantity-col">
+                                <div class="quantity-selector">
+                                    <button class="quantity-btn minus">-</button>
+                                    <input type="number" value="1" min="1" class="quantity-input">
+                                    <button class="quantity-btn plus">+</button>
+                                </div>
+                            </div>
+                            <div class="cart-col total-col">
+                                <p>UGX 320,000</p>
+                            </div>
+                            <div class="cart-col remove-col">
+                                <button class="remove-item"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cart-actions">
+                        <div class="coupon-form">
+                            <input type="text" placeholder="Coupon Code">
+                            <button class="btn-small">Apply Coupon</button>
+                        </div>
+                        <button class="btn-small update-cart">Update Cart</button>
+                    </div>
+                </div>
+                <div class="cart-summary">
+                    <h2>Cart Summary</h2>
+                    <div class="summary-item">
+                        <span>Subtotal</span>
+                        <span>UGX 1,970,000</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Shipping</span>
+                        <span>UGX 30,000</span>
+                    </div>
+                    <div class="summary-item total">
+                        <span>Total</span>
+                        <span>UGX 2,000,000</span>
+                    </div>
+                    <button class="btn checkout-btn">Proceed to Checkout</button>
+                    <div class="continue-shopping">
+                        <a href="products.html"><i class="fas fa-arrow-left"></i> Continue Shopping</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="related-products">
+        <div class="container">
+            <h2 class="section-title">You May Also Like</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85" alt="Bedroom Set">
+                        <div class="product-overlay">
+                            <a href="#" class="add-to-cart" data-id="5"><i class="fas fa-shopping-cart"></i></a>
+                            <a href="#" class="quick-view"><i class="fas fa-eye"></i></a>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Bedroom Set</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="price">UGX 1,500,000</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1556912172-45b7abe8b7e1" alt="Dining Set">
+                        <div class="product-overlay">
+                            <a href="#" class="add-to-cart" data-id="3"><i class="fas fa-shopping-cart"></i></a>
+                            <a href="#" class="quick-view"><i class="fas fa-eye"></i></a>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Dining Set</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <p class="price">UGX 850,000</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1540574163026-643ea20ade25" alt="Bookshelf">
+                        <div class="product-overlay">
+                            <a href="#" class="add-to-cart" data-id="4"><i class="fas fa-shopping-cart"></i></a>
+                            <a href="#" class="quick-view"><i class="fas fa-eye"></i></a>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Bookshelf</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <p class="price">UGX 380,000</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1551298370-9d3d53740c72" alt="Accent Chair">
+                        <div class="product-overlay">
+                            <a href="#" class="add-to-cart" data-id="7"><i class="fas fa-shopping-cart"></i></a>
+                            <a href="#" class="quick-view"><i class="fas fa-eye"></i></a>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Accent Chair</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <p class="price">UGX 280,000</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Comrade Furniture</h3>
+                    <p>Premium furniture for modern living. Located in Makerere Kikoni, we provide quality furniture for homes and offices.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Makerere Kikoni, Kampala, Uganda</p>
+                    <p><i class="fas fa-phone"></i> +256 700 123456</p>
+                    <p><i class="fas fa-envelope"></i> info@comradefurniture.com</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Opening Hours</h3>
+                    <p>Monday - Friday: 8:00 AM - 6:00 PM</p>
+                    <p>Saturday: 9:00 AM - 5:00 PM</p>
+                    <p>Sunday: Closed</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2023 Comrade Furniture. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="search-modal">
+        <div class="search-modal-content">
+            <span class="close-search">&times;</span>
+            <h2>Search Our Store</h2>
+            <form class="search-form">
+                <input type="text" placeholder="Search for products...">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
