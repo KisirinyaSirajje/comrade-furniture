@@ -909,13 +909,13 @@ footer {
     gap: 30px;
 }
 
-.team-member {
+/* .team-member {
     background-color: var(--light-color);
     border-radius: 8px;
     overflow: hidden;
-}
+} */
 
-.member-image {
+/* .member-image {
     height: 250px;
     overflow: hidden;
 }
@@ -940,7 +940,100 @@ footer {
     color: var(--secondary-color);
     font-weight: 500;
     margin-bottom: 10px;
+} */
+
+/* Team section styling */
+.team-member {
+    display: flex;
+    margin-bottom: 30px;
+    flex-direction: column;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    background-color: #fff;
 }
+
+.team-member:hover {
+    transform: translateY(-5px);
+}
+
+.member-image {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+}
+
+.member-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This ensures the image covers the area without distortion */
+    object-position: center top; /* This positions the image to show faces better */
+    transition: transform 0.3s ease;
+}
+
+.team-member:hover .member-image img {
+    transform: scale(1.05);
+}
+
+.member-info {
+    padding: 20px;
+    text-align: center;
+}
+
+.member-info h3 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: #333;
+    font-size: 1.5rem;
+}
+
+.member-role {
+    color: #666;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.member-bio {
+    color: #555;
+    line-height: 1.5;
+}
+
+/* Responsive grid layout */
+@media (min-width: 768px) {
+    .team-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .team-member {
+        margin-bottom: 0;
+    }
+}
+
+@media (min-width: 1024px) {
+    .team-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* For very small screens */
+@media (max-width: 480px) {
+    .member-image {
+        height: 250px;
+    }
+    
+    .member-info h3 {
+        font-size: 1.2rem;
+    }
+    
+    .member-bio {
+        font-size: 0.9rem;
+    }
+}
+
+
 
 /* ===== CONTACT PAGE ===== */
 .contact-section {
